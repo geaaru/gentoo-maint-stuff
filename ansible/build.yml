@@ -1,0 +1,67 @@
+---
+- hosts:
+    - all
+  tasks:
+
+    - name: Build AMD64 image
+      tags:
+        - amd64
+      vars:
+        current_arch: 'amd64'
+        for_amd64: True
+        for_arm: False
+        gentoo_arch: 'amd64'
+      block:
+
+        - name: Check QEMU
+          tags:
+            - amd64_gentoo_stage3
+            - amd64_gentoo_stage3_libressl
+          include_role:
+            name: commons
+            tasks_from: check_qemu
+
+        - name: Build Gentoo Stage3
+          vars:
+            docker_build_opts: ''
+          tags:
+            - amd64_gentoo_stage3
+          include_role:
+            name: build
+            tasks_from: gentoo_stage3
+
+        - name: Build Gentoo Stage3 Libressl
+          vars:
+            docker_build_opts: ''
+          tags:
+            - amd64_gentoo_stage3_libressl
+          include_role:
+            name: build
+            tasks_from: gentoo_stage3_libressl
+
+    - name: Build ARM-7A image
+      tags:
+        - arm7
+      vars:
+        current_arch: 'armv7a_hardfp'
+        for_amd64: False
+        for_arm: True
+        gentoo_arch: 'arm'
+      block:
+
+        - name: Check QEMU
+          tags:
+            - arm7_gentoo_stage3
+          include_role:
+            name: commons
+            tasks_from: check_qemu
+
+        - name: Build Gentoo Stage3
+          vars:
+            docker_build_opts: '--build-arg GENTOO_PROFILE_NAME=/armv7a/systemd'
+          tags:
+            - arm7_gentoo_stage3
+          include_role:
+            name: build
+            tasks_from: arm7_gentoo_stage3
+

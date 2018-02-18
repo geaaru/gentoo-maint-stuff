@@ -1,0 +1,11 @@
+---
+
+# Author:  Geaaru, geaaru@gmail.com
+# Description: Script for prepare context build directory for docker build.
+
+- name: "{{ current_build }}: Copy Gentoo Stuff"
+  command: cp -arf {{ builder_rootdir }}/gentoo-stuff {{ current_builddir }}
+
+- name: "{{ current_build }}: Copy portage tarball"
+  command: cp -af {{ builder_rootdir }}/portage-latest.tar.xz {{ current_builddir }}
+

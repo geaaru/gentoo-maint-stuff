@@ -1,0 +1,50 @@
+---
+# Author:  Geaaru, geaaru@gmail.com
+# Description: Script for build stage3-gentoo-systemd-amd64 image
+
+- name: "Stage3 Gentoo Systemd Libressl AMD64"
+  vars:
+    current_build: "gentoo-stage3-systemd-{{ current_arch }}"
+    current_builddir: "{{ builder_rootdir }}/stage3-systemd-libressl"
+    current_date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+    docker_image_name: "{{ docker_user }}/gentoo-stage3-systemd-libressl-{{ current_arch }}"
+  block:
+
+    - name: "{{ current_build }}: Check for updated portage tarball"
+      include_role:
+        name: commons
+        tasks_from: download_portage
+
+    - name: "{{ current_build }}: Prepare build context"
+      include_role:
+        name: commons
+        tasks_from: prepare_ctx
+
+    - name: "{{ current_build }}: Download AMD64 stage3 image"
+      include_role:
+        name: commons
+        tasks_from: download_stage3_image
+
+    - name: "{{ current_build }}: Create image {{ docker_image_name }}"
+      command: >
+        docker build
+        -t {{ docker_image_name }}
+        --build-arg TARBALL={{ stage3_file }}
+        --build-arg GENTOO_SKIP_SYNC={{ gentoo_skip_sync }}
+        --build-arg GENTOO_ARCH={{ gentoo_arch }}
+        --build-arg GENTOO_PROFILE_NAME=/systemd
+        {{ docker_build_opts }}
+        --build-arg CACHEBUST={{ current_date }} .
+      args:
+        chdir: "{{ current_builddir }}"
+      register: gentoo_state3_build
+
+    - name: "{{ current_build }}: Build result"
+      debug: var=gentoo_state3_build.stdout_lines
+
+    # I don't clean context to avoid rebuild
+    #- name: "{{ current_build }}: Clean build context"
+    #  include_role:
+    #    name: commons
+    #    tasks_from: clean_ctx
+
