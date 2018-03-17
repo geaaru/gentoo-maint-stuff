@@ -10,6 +10,9 @@ Currently support creation of this stage3 images:
 
   * stage3-systemd-libressl: a stage3 image with libressl library instead of openssl
 
+  * stage3-allpy: extend stage3-systemd and add all python/pypy version for test ebuild
+                  with different python targets.
+
   * stage3-openrc: directly a copy of stage3 image with an emerge @world after push latest
                    portage tarball (TODO)
 

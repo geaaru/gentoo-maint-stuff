@@ -17,6 +17,7 @@
           tags:
             - amd64_gentoo_stage3
             - amd64_gentoo_stage3_libressl
+            - amd64_gentoo_stage3_allpy
           include_role:
             name: commons
             tasks_from: check_qemu
@@ -38,6 +39,15 @@
           include_role:
             name: build
             tasks_from: gentoo_stage3_libressl
+
+        - name: Build Gentoo Stage3 Python Tester
+          vars:
+            docker_build_opts: ''
+          tags:
+            - amd64_gentoo_stage3_allpy
+          include_role:
+            name: build
+            tasks_from: gentoo_stage3_allpy
 
     - name: Build ARM-7A image
       tags:

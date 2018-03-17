@@ -150,16 +150,38 @@ gentoo_set_python_targets () {
 
   local targets=${1:-python2_7}
 
-  echo "PYTHON_TARGETS=\"${targets}\"" >> ${MAKE_PORTAGE_FILE}
+  # Check if is already present field on make.conf file
+  local has_field=$(cat  ${MAKE_PORTAGE_FILE}  | grep "^PYTHON_TARGETS="  | wc -l)
+
+  if [ ${has_field} -eq 1 ] ; then
+    # Replace existing
+    sed -i -e \
+       "s:^PYTHON_TARGETS=.*:PYTHON_TARGETS=\"${targets}\":g" \
+      ${MAKE_PORTAGE_FILE}
+  else
+
+    echo "PYTHON_TARGETS=\"${targets}\"" >> ${MAKE_PORTAGE_FILE}
+
+  fi
 
   return $?
 }
 
 gentoo_set_python_single_target () {
 
-  local targets=${1:-python3_5}
+  local target=${1:-python3_5}
 
-  echo "PYTHON_SINGLE_TARGET=\"${targets}\"" >> ${MAKE_PORTAGE_FILE}
+  # check if is already present field on make.conf file
+  local has_field=$(cat ${MAKE_PORTAGE_FILE} | grep "^PYTHON_SINGLE_TARGET=" | wc -l)
+
+  if [ ${has_field} -eq 1 ] ; then
+    # Replace existing
+    sed -i -e \
+      "s:^PYTHON_SINGLE_TARGET=.*:PYTHON_SINGLE_TARGET=\"${target}\":g" \
+      ${MAKE_PORTAGE_FILE}
+  else
+    echo "PYTHON_SINGLE_TARGET=\"${target}\"" >> ${MAKE_PORTAGE_FILE}
+  fi
 
   return $?
 }
