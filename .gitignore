@@ -1,0 +1,11 @@
+*.swp
+*.tar.xz
+stage3-allpy/gentoo-stuff/
+stage3-systemd-libressl/gentoo-stuff/
+stage3-systemd/gentoo-stuff/
+ansible/docker-companion
+ansible/logs/ansible.log
+ansible/tmp/
+portage-latest.tar.xz.md5sum
+ansible/staging/
+
