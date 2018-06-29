@@ -7,6 +7,7 @@
   stat:
     path: "{{ builder_rootdir }}/portage-latest.tar.xz.md5sum"
     get_checksum: yes
+    checksum_algorithm: md5
   register: portage_md5_file
 
 #- name: "{{ current_build }}: Calculate MD5 of current portage md5sum file"
@@ -16,7 +17,7 @@
 
 - name: "{{ current_build }}: Set empty current_md5_file variable"
   set_fact:
-    portage_md5_file: { "stat": { "md5": "", "exists": false } }
+    portage_md5_file: { "stat": { "checksum": "", "exists": false } }
   when: not portage_md5_file.stat.exists
 
 - name: "{{ current_build }}: Download latest portage md5sum file"
@@ -37,7 +38,7 @@
 
 - name: "{{ current_build }}: Check portage md5"
   set_fact:
-    portage_new_md5: "{{ ( portage_md5.stdout != portage_md5_file.stat.md5 ) | bool }}"
+    portage_new_md5: "{{ ( portage_md5.stdout != portage_md5_file.stat.checksum ) | bool }}"
     portage_tarball_checksum: "md5:{{ portage_md5_tarball.stdout }}"
 
 - name: "{{ current_build }}: Download latest portage file"
