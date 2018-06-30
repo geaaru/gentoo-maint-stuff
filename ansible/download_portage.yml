@@ -1,0 +1,10 @@
+---
+- hosts:
+    - all
+  tasks:
+    - name: "{{ current_build }}: Check for updated portage tarball"
+      vars:
+        builder_rootdir: "."
+      include_role:
+        name: commons
+        tasks_from: download_portage

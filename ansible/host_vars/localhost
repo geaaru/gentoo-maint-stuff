@@ -8,3 +8,4 @@ gentoo_profile_version: 17.0
 staging_dir: ./staging
 lxd_target_server: local
 lxd_skip_pull: 1
+portage_md5_check: 0
