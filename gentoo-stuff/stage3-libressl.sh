@@ -17,6 +17,8 @@ gentoo_stage3_init () {
 
   gentoo_set_locate || return 1
 
+  gentoo_set_resolvconf || return 1
+
   if [ "${GENTOO_ARCH}" == "arm" ] ; then
     gentoo_set_makeopts 2 || return 1
   else

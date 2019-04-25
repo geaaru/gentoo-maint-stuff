@@ -25,6 +25,8 @@ gentoo_stage3_allpy_init () {
   local keywords="/etc/portage/package.keywords/00-allpy.keywords"
   local usemask="/etc/portage/profile/use.mask"
 
+  gentoo_set_resolvconf || return 1
+
   gentoo_set_python_targets "${PYVERSIONS[@]}" || return 1
 
   for ((i = 0 ; i < ${#UNMASK_KEYWORDS[@]} ; i++)) ; do
