@@ -8,12 +8,16 @@
     current_builddir: "{{ builder_rootdir }}/stage3-gentoo-systemd"
     current_date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
     docker_image_name: "{{ docker_user }}/stage3-gentoo-systemd-{{ current_arch }}"
+  tags:
+    - arm7_gentoo_stage3
   block:
 
     - name: "{{ current_build }}: Check for updated portage tarball"
       include_role:
         name: commons
         tasks_from: download_portage
+      tags:
+        - arm7_gentoo_stage3
 
     - name: "{{ current_build }}: Prepare build context"
       include_role:

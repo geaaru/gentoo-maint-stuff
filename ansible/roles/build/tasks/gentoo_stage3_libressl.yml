@@ -8,6 +8,8 @@
     current_builddir: "{{ builder_rootdir }}/stage3-systemd-libressl"
     current_date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
     docker_image_name: "{{ docker_user }}/gentoo-stage3-systemd-libressl-{{ current_arch }}"
+  tags:
+    - amd64_gentoo_stage3_libressl
   block:
 
     - name: "{{ current_build }}: Check for updated portage tarball"
