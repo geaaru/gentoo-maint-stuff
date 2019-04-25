@@ -18,7 +18,7 @@ UNMASK_USES=(
   "-python_targets_pypy3"
 )
 
-PYVERSIONS=( python{2_7,3_4,3_5,3_6} pypy pypy3 )
+PYVERSIONS=( python{2_7,3_5,3_6,3_7} pypy pypy3 )
 
 gentoo_stage3_allpy_init () {
 

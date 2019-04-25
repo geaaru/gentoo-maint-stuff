@@ -24,8 +24,8 @@ gentoo_stage3_init () {
   fi
 
   # For compile dev-util/meson required by systemd
-  # is needed python3_5
-  gentoo_set_python_targets "python2_7 python3_5" || return 1
+  # is needed python3_6
+  gentoo_set_python_targets "python2_7 python3_6" || return 1
 
   gentoo_set_python_single_target || return 1
 

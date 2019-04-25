@@ -24,8 +24,8 @@ gentoo_stage3_init () {
   fi
 
   # For compile dev-util/meson required by systemd
-  # is needed python3_5
-  gentoo_set_python_targets "python2_7 python3_5" || return 1
+  # is needed python3_6
+  gentoo_set_python_targets "python2_7 python3_6" || return 1
 
   gentoo_set_python_single_target || return 1
 
@@ -67,7 +67,7 @@ gentoo_stage3_libressl_migration () {
   emerge -C openssl || return 1
   emerge -1q libressl || return 1
 
-  emerge -1q openssh wget python:2.7 python:3.5 iputils || return 1
+  emerge -1q openssh wget python:2.7 python:3.6 iputils || return 1
 
   return 0
 }

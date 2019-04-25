@@ -169,7 +169,7 @@ gentoo_set_python_targets () {
 
 gentoo_set_python_single_target () {
 
-  local target=${1:-python3_5}
+  local target=${1:-python3_6}
 
   # check if is already present field on make.conf file
   local has_field=$(cat ${MAKE_PORTAGE_FILE} | grep "^PYTHON_SINGLE_TARGET=" | wc -l)
