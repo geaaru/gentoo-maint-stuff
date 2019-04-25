@@ -5,7 +5,7 @@ ARG TARGET_ARCH=amd64
 
 FROM ${USER}/gentoo-stage3-systemd-${TARGET_ARCH}
 
-MAINTAINER geaaru <geaaru@gmail.com>
+LABEL maintainer="geaaru <geaaru@sabayonlinux.org>"
 
 ADD ./gentoo-stuff/ /gentoo-stuff
 RUN chmod a+x /gentoo-stuff/stage3_allpy.sh

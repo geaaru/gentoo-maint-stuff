@@ -1,6 +1,6 @@
 FROM scratch
 
-MAINTAINER geaaru <geaaru@gmail.com>
+LABEL maintainer="geaaru <geaaru@sabayonlinux.org>"
 
 ARG TARBALL=local
 ENV TARBALL ${TARBALL}
