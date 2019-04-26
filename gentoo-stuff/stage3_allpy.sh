@@ -46,7 +46,11 @@ gentoo_stage3_allpy_init () {
 
 gentoo_stage3_allpy_build () {
 
-  local emerge_opts="-j --newuse --with-bdeps=y"
+  local emerge_opts="-j --newuse --with-bdeps=y -t"
+
+  emerge ${emerge_opts} \
+    dev-python/python dev-python/pypy dev-python/pypy3 || return 1
+
   emerge ${emerge_opts} @world || return 1
 
   return 0
