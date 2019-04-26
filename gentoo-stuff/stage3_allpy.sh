@@ -4,11 +4,11 @@
 . $(dirname $(readlink -f $BASH_SOURCE))/commons.sh
 
 UNMASK_KEYWORDS=(
-  "=dev-python/pypy-5.10.0 ~amd64"
-  "=dev-python/pypy3-5.10.1 ~amd64"
+  "=dev-python/pypy-6.0.0 ~amd64"
+  "=dev-python/pypy3-6.0.0 ~amd64"
 
-  "=virtual/pypy-5.10.0 ~amd64"
-  "=virtual/pypy3-5.10.1 ~amd64"
+  "=virtual/pypy-6.0.0 ~amd64"
+  "=virtual/pypy3-6.0.0 ~amd64"
 )
 
 UNMASK_USES=(
@@ -26,6 +26,8 @@ gentoo_stage3_allpy_init () {
   local usemask="/etc/portage/profile/use.mask"
 
   gentoo_set_resolvconf || return 1
+
+  mkdir -p /etc/portage/package.keywords/ || true
 
   gentoo_set_python_targets "${PYVERSIONS[@]}" || return 1
 
